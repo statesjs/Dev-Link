@@ -8,11 +8,6 @@ const expressLayouts = require("express-ejs-layouts");
 //  Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-//views
-app.use(express.static("public"));
-app.use("/css", express.static(__dirname + "public/css"));
-app.use(expressLayouts);
-app.set("view engine", "ejs");
 
 //ROUTERS
 const userRoutes = require("./routes/userRoutes");
@@ -24,7 +19,7 @@ app.use("/api/resources", resourceRoutes);
 app.use("/api/comments", commentRoutes);
 //ROOT get request + view
 app.get("/", (req, res) => {
-  res.render("index");
+  res.send("Welcome to the API");
 });
 // Connect to Database + Start Server
 mongoose
