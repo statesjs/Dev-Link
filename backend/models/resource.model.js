@@ -1,4 +1,3 @@
-const { required } = require("joi");
 const mongoose = require("mongoose");
 
 const resourceSchema = mongoose.Schema(
@@ -21,14 +20,20 @@ const resourceSchema = mongoose.Schema(
       minLength: 5,
       maxLength: 1000,
     },
+    image: {
+      required: false,
+      type: String,
+      trim: true,
+      minlength: 5,
+      maxlength: 2048,
+    },
   },
   {
     timestamps: true,
   }
 );
-//easiest to query, short and what people would search for
+
 resourceSchema.index({ title: 1 });
-//to help find resources by the newest addition
 resourceSchema.index({ createdAt: -1 });
 
 module.exports = mongoose.model("Resource", resourceSchema);

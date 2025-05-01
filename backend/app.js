@@ -4,6 +4,7 @@ const mongoose = require("mongoose");
 const app = express();
 const PORT = process.env.PORT || 5050;
 const expressLayouts = require("express-ejs-layouts");
+const errorHandler = require("./middleware/errorHandler");
 
 //  Middleware
 app.use(express.json());
@@ -21,6 +22,11 @@ app.use("/api/comments", commentRoutes);
 app.get("/", (req, res) => {
   res.send("Welcome to the API");
 });
+
+//test
+app.get("/test-error", (req, res) => {
+  throw new Error("Intentional failure");
+});
 // Connect to Database + Start Server
 mongoose
   .connect(process.env.ATLAS_URI, {
@@ -35,3 +41,7 @@ mongoose
   .catch((error) => {
     console.log(`Failed to connect to database DevLink`);
   });
+
+//error handling
+
+app.use(errorHandler);

@@ -3,27 +3,27 @@ const User = require("../models/user.model");
 const router = express.Router();
 
 //GET
-router.get("/", async (req, res) => {
+router.get("/", async (req, res, next) => {
   try {
     const users = await User.find();
     res.status(200).json(users);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    next(error);
   }
 });
 
 //POST create a new user
-router.post("/", async (req, res) => {
+router.post("/", async (req, res, next) => {
   try {
     const user = await User.create(req.body);
-    res.status(200).json(user);
+    res.status(201).json(user);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    next(error);
   }
 });
 
 // GET a user by ID
-router.get("/:id", async (req, res) => {
+router.get("/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
     const user = await User.findById(id);
@@ -34,7 +34,7 @@ router.get("/:id", async (req, res) => {
 
     res.status(200).json(user);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    next(error);
   }
 });
 module.exports = router;

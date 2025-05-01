@@ -3,29 +3,32 @@ const Resource = require("../models/resource.model");
 const router = express.Router();
 
 //GET
-router.get("/", async (req, res) => {
+router.get("/", async (req, res, next) => {
   try {
     const resources = await Resource.find();
     res.status(200).json(resources);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    next(error);
   }
 });
 
 //POST create a new resource
-router.post("/", async (req, res) => {
+router.post("/", async (req, res, next) => {
   try {
     const resource = await Resource.create(req.body);
     res.status(200).json(resource);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    next(error);
   }
 });
 //PUT request
-router.put("/:id", async (req, res) => {
+router.put("/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
-    const updatedResource = await Resource.findByIdAndUpdate(id, req.body, {});
+    const updatedResource = await Resource.findByIdAndUpdate(id, req.body, {
+      new: true,
+      runValidators: true,
+    });
 
     if (!updatedResource) {
       return res.status(404).json({ message: "Resource not found" });
@@ -33,13 +36,13 @@ router.put("/:id", async (req, res) => {
 
     res.status(200).json(updatedResource);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    next(error);
   }
 });
 
 //DELETE request
 
-router.delete("/:id", async (req, res) => {
+router.delete("/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
     const deletedResource = await Resource.findByIdAndDelete(id);
@@ -49,23 +52,23 @@ router.delete("/:id", async (req, res) => {
     }
     res.status(200).json({ message: "Resource deleted successfully." });
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    next(error);
   }
 });
 
 // GET a resource by ID
-router.get("/:id", async (req, res) => {
+router.get("/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
     const resource = await Resource.findById(id);
 
     if (!resource) {
-      return res.status(404).json({ message: "User not found" });
+      return res.status(404).json({ message: "Resource not found" });
     }
 
     res.status(200).json(resource);
   } catch (error) {
-    res.status(500).json({ message: error.message });
+    next(error);
   }
 });
 
