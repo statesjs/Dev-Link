@@ -1,7 +1,7 @@
 const express = require("express");
 const Comment = require("../models/comment.model");
 const router = express.Router();
-
+const auth = require("../middleware/auth");
 // GET all comments
 router.get("/", async (req, res, next) => {
   try {
@@ -29,9 +29,9 @@ router.get("/:id", async (req, res, next) => {
 });
 
 // POST create a new comment
-router.post("/", async (req, res, next) => {
+router.post("/", auth, async (req, res, next) => {
   try {
-    const comment = await Comment.create(req.body);
+    const comment = await Comment.create({ username: req.id }, req.body);
     res.status(201).json(comment);
   } catch (error) {
     next(error);

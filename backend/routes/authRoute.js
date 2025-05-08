@@ -71,4 +71,13 @@ router.post("/login", async (req, res, next) => {
   }
 });
 
+const auth = require("../middleware/auth");
+
+//make sure to have the initial load check this endpoint first, then if not, go to the unlogged page
+
+router.get("/me", auth, async (req, res) => {
+  const user = await User.findById(req.user.id).select("-password");
+  res.status(200).json(user);
+});
+
 module.exports = router;

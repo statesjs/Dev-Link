@@ -27,19 +27,19 @@ router.post("/", auth, async (req, res, next) => {
   }
 });
 //PUT request
-router.put("/:id", async (req, res, next) => {
+router.put("/:id", auth, async (req, res, next) => {
   try {
-    const { id } = req.params;
-    const updatedResource = await Resource.findByIdAndUpdate(id, req.body, {
+    const resource = await Resource.findById(req.params.id);
+    if (!resource) return res.status(404).json({ message: "Not found" });
+    if (resource.author.toString() !== req.user.id) {
+      return res.status(403).json({ message: "Forbidden" });
+    }
+
+    const updated = await Resource.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
       runValidators: true,
     });
-
-    if (!updatedResource) {
-      return res.status(404).json({ message: "Resource not found" });
-    }
-
-    res.status(200).json(updatedResource);
+    res.status(200).json(updated);
   } catch (error) {
     next(error);
   }
@@ -47,14 +47,17 @@ router.put("/:id", async (req, res, next) => {
 
 //DELETE request
 
-router.delete("/:id", async (req, res, next) => {
+router.delete("/:id", auth, async (req, res, next) => {
   try {
     const { id } = req.params;
-    const deletedResource = await Resource.findByIdAndDelete(id);
-
-    if (!deletedResource) {
+    const resource = await Resource.findById(req.params.id);
+    if (!resource) {
       return res.status(404).json({ message: "Resource not found" });
     }
+    if (resource.author.toString() !== req.user.id) {
+      return res.status(403).json({ message: "Must be the author to delete." });
+    }
+    await Resource.findByIdandDelete(id);
     res.status(200).json({ message: "Resource deleted successfully." });
   } catch (error) {
     next(error);
