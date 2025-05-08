@@ -2,13 +2,30 @@ require("dotenv").config();
 const express = require("express");
 const mongoose = require("mongoose");
 const app = express();
+const cors = require("cors");
+const morgan = require("morgan");
 const PORT = process.env.PORT || 5050;
 const expressLayouts = require("express-ejs-layouts");
+
+//custom middleware
 const errorHandler = require("./middleware/errorHandler");
 
-//  Middleware
+// ---3RD PARTY MIDDLEWARE---
+
+//set morgan
+app.use(morgan()); //just a quality of life logger for server requests
+
+//set cors
+app.use(
+  cors({
+    origin: "http://localhost:3000", // replace with the frontend url later 🚧🚧🚧🚧
+  })
+);
+
+//  Native Middleware
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded({ extended: true })); //parses incoming form data
+app.use(express.static("./public"));
 
 //ROUTERS
 const userRoutes = require("./routes/userRoutes");
@@ -30,7 +47,7 @@ app.get("/test-error", (req, res) => {
 // Connect to Database + Start Server
 mongoose
   .connect(process.env.ATLAS_URI, {
-    family: 4, //I needed this for me
+    family: 4, //I needed this for me, change later depending on IP
   })
   .then(() => {
     console.log(`Connected to database DevLink`);
