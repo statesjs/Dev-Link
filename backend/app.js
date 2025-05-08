@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 const app = express();
 const cors = require("cors");
 const morgan = require("morgan");
-const multer = require("multer");
+
 const PORT = process.env.PORT || 5050;
 const expressLayouts = require("express-ejs-layouts");
 
@@ -13,17 +13,13 @@ const errorHandler = require("./middleware/errorHandler");
 
 // ---3RD PARTY MIDDLEWARE---
 
-//set multer engine
-const storage = multer.diskStorage({});
-export const upload = multer({ storage: storage });
-
 //set morgan
 app.use(morgan()); //just a quality of life logger for server requests
 
 //set cors
 app.use(
   cors({
-    origin: "http://localhost:3000", // replace with the frontend url later 🚧🚧🚧🚧
+    origin: "http://localhost:5173", // replace with the frontend url later 🚧🚧🚧🚧
   })
 );
 
@@ -36,10 +32,13 @@ app.use(express.static("./public"));
 const userRoutes = require("./routes/userRoutes");
 const resourceRoutes = require("./routes/resourceRoutes");
 const commentRoutes = require("./routes/commentRoutes");
+const authRoutes = require("./routes/authRoutes");
 //implementing routes
 app.use("/api/users", userRoutes);
 app.use("/api/resources", resourceRoutes);
 app.use("/api/comments", commentRoutes);
+app.use("/api/users"); //shares the same end point as the normal users route, dont forget
+
 //ROOT get request + view
 app.get("/", (req, res) => {
   res.send("Welcome to the API");
@@ -67,3 +66,5 @@ mongoose
 //error handling
 
 app.use(errorHandler);
+
+//exports
