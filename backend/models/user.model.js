@@ -1,3 +1,4 @@
+const { required } = require("joi");
 const mongoose = require("mongoose");
 
 const userSchema = mongoose.Schema(
@@ -11,10 +12,9 @@ const userSchema = mongoose.Schema(
       unique: true,
     },
     password: {
+      //hashed when stored n checked, refer to auth routes
       required: true,
       type: String,
-      minLength: 5,
-      maxLength: 30,
     },
     email: {
       type: String,
@@ -22,6 +22,13 @@ const userSchema = mongoose.Schema(
       lowercase: true,
       unique: true,
       match: [/.+\@.+\..+/, "Please provide a valid email address"],
+    },
+    publicId: {
+      type: String,
+    },
+    imageUrl: {
+      required: false,
+      type: String,
     },
   },
   {

@@ -1,6 +1,7 @@
 const express = require("express");
 const Resource = require("../models/resource.model");
 const router = express.Router();
+const auth = require("../middleware/auth");
 
 //GET
 router.get("/", async (req, res, next) => {
@@ -14,9 +15,12 @@ router.get("/", async (req, res, next) => {
 });
 
 //POST create a new resource
-router.post("/", async (req, res, next) => {
+router.post("/", auth, async (req, res, next) => {
   try {
-    const resource = await Resource.create(req.body);
+    const resource = await Resource.create({
+      ...req.body,
+      author: req.user.id,
+    });
     res.status(201).json(resource);
   } catch (error) {
     next(error);
