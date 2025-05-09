@@ -39,7 +39,7 @@ router.post("/", auth, async (req, res, next) => {
 });
 
 // PUT update a comment
-router.put("/:id", async (req, res, next) => {
+router.put("/:id", auth, async (req, res, next) => {
   try {
     const { id } = req.params;
     const updatedComment = await Comment.findByIdAndUpdate(id, req.body, {
@@ -58,7 +58,7 @@ router.put("/:id", async (req, res, next) => {
 });
 
 // DELETE comment
-router.delete("/:id", async (req, res, next) => {
+router.delete("/:id", auth, async (req, res, next) => {
   try {
     const { id } = req.params;
     const deletedComment = await Comment.findByIdAndDelete(id);

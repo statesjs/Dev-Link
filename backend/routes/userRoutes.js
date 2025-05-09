@@ -12,15 +12,15 @@ router.get("/", async (req, res, next) => {
   }
 });
 
-//POST create a new user
-router.post("/", async (req, res, next) => {
-  try {
-    const user = await User.create(req.body);
-    res.status(201).json(user);
-  } catch (error) {
-    next(error);
-  }
-});
+//POST create a new user moved over to authRoutes
+// router.post("/", async (req, res, next) => {
+//   try {
+//     const user = await User.create(req.body);
+//     res.status(201).json(user);
+//   } catch (error) {
+//     next(error);
+//   }
+// });
 
 // GET a user by ID
 router.get("/:id", async (req, res, next) => {

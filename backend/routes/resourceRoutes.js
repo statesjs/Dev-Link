@@ -57,7 +57,7 @@ router.delete("/:id", auth, async (req, res, next) => {
     if (resource.author.toString() !== req.user.id) {
       return res.status(403).json({ message: "Must be the author to delete." });
     }
-    await Resource.findByIdandDelete(id);
+    await Resource.findByIdAndDelete(id);
     res.status(200).json({ message: "Resource deleted successfully." });
   } catch (error) {
     next(error);

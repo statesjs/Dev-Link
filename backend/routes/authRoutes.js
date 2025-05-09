@@ -10,7 +10,7 @@ router.post("/register", async (req, res, next) => {
   try {
     const { username, email, password } = req.body;
 
-    //consider making one for username too even tho it has a unique trait?
+    // +_+_+_+_+_+_+_+_+_+_Check for existing username or email+_+_+_+_+_+_+_
     const existingEmail = await User.findOne({ email });
     if (existingEmail) {
       return res.status(400).json({ message: "Email already in use" });
@@ -20,6 +20,7 @@ router.post("/register", async (req, res, next) => {
     if (existingUser) {
       return res.status(400).json({ message: "Username already in use" });
     }
+    //+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_+_
 
     //hashing
     const salt = await bcrypt.genSalt(10);
@@ -32,10 +33,12 @@ router.post("/register", async (req, res, next) => {
       password: hashedPassword,
     });
 
+    //dont include anything sensitive
     const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, {
       expiresIn: "7d",
     });
 
+    //don't forget to store this on the front end side later 🚧🚧🚧 also should make sure to use a auth helper function on all protected routes
     res.status(201).json({ token, user: { id: newUser._id, username } });
   } catch (err) {
     next(err);
@@ -51,6 +54,7 @@ router.post("/login", async (req, res, next) => {
     const user = await User.findOne({ email });
     if (!user) return res.status(400).json({ message: "Invalid email" });
 
+    //compare passwords post hashing
     const isMatch = await bcrypt.compare(password, user.password);
     if (!isMatch) return res.status(400).json({ message: "Invalid password" });
 

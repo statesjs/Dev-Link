@@ -14,7 +14,7 @@ const errorHandler = require("./middleware/errorHandler");
 // ---3RD PARTY MIDDLEWARE---
 
 //set morgan
-app.use(morgan()); //just a quality of life logger for server requests
+app.use(morgan("common")); //just a quality of life logger for server requests
 
 //set cors
 app.use(
@@ -37,11 +37,11 @@ const authRoutes = require("./routes/authRoutes");
 app.use("/api/users", userRoutes);
 app.use("/api/resources", resourceRoutes);
 app.use("/api/comments", commentRoutes);
-app.use("/api/users"); //shares the same end point as the normal users route, dont forget
+app.use("/api/users", authRoutes); //shares the same end point as the normal users route, dont forget
 
 //ROOT get request + view
 app.get("/", (req, res) => {
-  res.send("Welcome to the API");
+  res.send("DEVLINK API ROOT ENDPOINT");
 });
 
 //test
