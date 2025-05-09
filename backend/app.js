@@ -4,6 +4,8 @@ const mongoose = require("mongoose");
 const app = express();
 const cors = require("cors");
 const morgan = require("morgan");
+const helmet = require("helmet");
+const multer = require("multer");
 
 const PORT = process.env.PORT || 5050;
 const expressLayouts = require("express-ejs-layouts");
@@ -12,6 +14,11 @@ const expressLayouts = require("express-ejs-layouts");
 const errorHandler = require("./middleware/errorHandler");
 
 // ---3RD PARTY MIDDLEWARE---
+
+//set multer
+
+//set helmet
+app.use(helmet()); //using default security
 
 //set morgan
 app.use(morgan("common")); //just a quality of life logger for server requests

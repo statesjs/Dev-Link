@@ -1,14 +1,21 @@
 IMPORTANT ***
 -----
+Make sure to come back to the back end to implement multer and adding connection to
+cloudinary image hosting
+-----
+
+SECURITY NOTES **
+-----
 should consider adding joi, if time allots . security and validation are pretty
 high already:
 
-mongoose schema,
-helmet,
-select method to hide data,
-jwt encryption,
-regex,
-10 salt rounds on password hashing,
+mongoose schema: https://mongoosejs.com/docs/guide.html
+helmet: https://www.npmjs.com/package/helmet
+select method to hide data: https://www.geeksforgeeks.org/mongoose-query-prototype-select-api/
+jwt encryption: https://www.npmjs.com/package/jsonwebtoken
+bcryptjs- 10 salt rounds : https://www.npmjs.com/package/bcryptjs
+regex: https://digitalfortress.tech/tips/top-15-commonly-used-regex/
+
 -----
 
 
@@ -42,5 +49,7 @@ end notes for this entry:
 -should consider select options colliding, maybe have to just set false on 
 the model, then only override on the routes when needed
 
+5/9 11:05am - 
 
+general cleanup + added forgotten but imported libraries
 
