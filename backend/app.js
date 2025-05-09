@@ -5,7 +5,6 @@ const app = express();
 const cors = require("cors");
 const morgan = require("morgan");
 const helmet = require("helmet");
-const multer = require("multer");
 
 const PORT = process.env.PORT || 5050;
 const expressLayouts = require("express-ejs-layouts");
@@ -15,7 +14,8 @@ const errorHandler = require("./middleware/errorHandler");
 
 // ---3RD PARTY MIDDLEWARE---
 
-//set multer
+//set multer storage
+const upload = require("./middleware/upload");
 
 //set helmet
 app.use(helmet()); //using default security
