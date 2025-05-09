@@ -6,7 +6,11 @@ const auth = require("../middleware/auth");
 //GET
 router.get("/", async (req, res, next) => {
   try {
-    const resources = await Resource.find();
+    //populate to
+    const resources = await Resource.find()
+      .populate("author", "username")
+      //sort the data for newest only
+      .sort({ createdAt: -1 });
 
     res.status(200).json(resources);
   } catch (error) {
@@ -26,6 +30,7 @@ router.post("/", auth, async (req, res, next) => {
     next(error);
   }
 });
+
 //PUT request
 router.put("/:id", auth, async (req, res, next) => {
   try {

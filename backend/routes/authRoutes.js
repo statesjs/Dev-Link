@@ -39,6 +39,7 @@ router.post("/register", async (req, res, next) => {
     });
 
     //don't forget to store this on the front end side later 🚧🚧🚧 also should make sure to use a auth helper function on all protected routes
+    //return only the token later, doing this just helps for testing to make sure it's all passing through safely
     res.status(201).json({ token, user: { id: newUser._id, username } });
   } catch (err) {
     next(err);
@@ -62,6 +63,7 @@ router.post("/login", async (req, res, next) => {
       expiresIn: "7d",
     });
 
+    //return only the token later, doing this just helps for testing to make sure it's all passing through safely
     res.status(200).json({
       token,
       user: {

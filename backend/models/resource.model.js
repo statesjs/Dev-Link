@@ -2,6 +2,12 @@ const mongoose = require("mongoose");
 
 const resourceSchema = mongoose.Schema(
   {
+    author: {
+      type: mongoose.Schema.Types.ObjectId,
+      //reference will pull from the Users collection in the database
+      ref: "User",
+      required: true,
+    },
     title: {
       required: true,
       type: String,
