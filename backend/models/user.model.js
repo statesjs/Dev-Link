@@ -6,6 +6,7 @@ const userSchema = mongoose.Schema(
     username: {
       type: String,
       required: [true, "Username is required"],
+      lowercase: true,
       minlength: 3,
       maxlength: 30,
       trim: true,
@@ -15,6 +16,10 @@ const userSchema = mongoose.Schema(
       //hashed when stored n checked, refer to auth routes
       required: true,
       type: String,
+      select: false, //it's unnessacary since all my get routes specifically
+      // use either select (-password) or select on a specific field,
+      // but I feel like a triple threat security is what would make this a
+      //portfolio worthy project down the road
     },
     email: {
       type: String,

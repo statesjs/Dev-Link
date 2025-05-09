@@ -52,7 +52,7 @@ router.post("/login", async (req, res, next) => {
   try {
     const { email, password } = req.body;
 
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email }).select("+password"); //override the model select
     if (!user) return res.status(400).json({ message: "Invalid email" });
 
     //compare passwords post hashing
@@ -83,6 +83,7 @@ const auth = require("../middleware/auth");
 
 router.get("/me", auth, async (req, res) => {
   const user = await User.findById(req.user.id).select("-password");
+  //select excludes their password
   res.status(200).json(user);
 });
 

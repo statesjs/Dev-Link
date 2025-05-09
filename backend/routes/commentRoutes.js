@@ -5,24 +5,25 @@ const auth = require("../middleware/auth");
 // GET all comments
 router.get("/", async (req, res, next) => {
   try {
-    const comments = await Comment.find();
+    const comments = await Comment.find()
+      .populate("user", "username")
+      .sort({ createdAt: -1 });
+
     res.status(200).json(comments);
   } catch (error) {
     next(error);
   }
 });
 
-// GET a comment by ID
-router.get("/:id", async (req, res, next) => {
+// GET a comment by resource
+//use this later when i have to populate under the resource for the comments
+router.get("/resource/:resourceId", async (req, res, next) => {
   try {
-    const { id } = req.params;
-    const comment = await Comment.findById(id);
+    const comments = await Comment.find({ resource: req.params.resourceId })
+      .populate("user", "username")
+      .sort({ createdAt: -1 });
 
-    if (!comment) {
-      return res.status(404).json({ message: "Comment not found" });
-    }
-
-    res.status(200).json(comment);
+    res.status(200).json(comments);
   } catch (error) {
     next(error);
   }
@@ -31,43 +32,54 @@ router.get("/:id", async (req, res, next) => {
 // POST create a new comment
 router.post("/", auth, async (req, res, next) => {
   try {
-    const comment = await Comment.create({ username: req.id }, req.body);
+    const { body, resource } = req.body; //which contains the req.user.id from the auth middleware now
+    const comment = await Comment.create({
+      body,
+      resource, //have to inject this on the front end
+      user: req.user.id, //finally used here
+    });
+
     res.status(201).json(comment);
   } catch (error) {
     next(error);
   }
 });
 
-// PUT update a comment
+// PUT update
 router.put("/:id", auth, async (req, res, next) => {
   try {
-    const { id } = req.params;
-    const updatedComment = await Comment.findByIdAndUpdate(id, req.body, {
+    const comment = await Comment.findById(req.params.id);
+    if (!comment) return res.status(404).json({ message: "Not found" });
+
+    //optional, shouldnt need in the end but ill have to use if I have trouble finishing up the front end
+    if (comment.user.toString() !== req.user.id) {
+      return res.status(403).json({ message: "Forbidden: not your comment" });
+    }
+
+    const updated = await Comment.findByIdAndUpdate(req.params.id, req.body, {
       new: true,
       runValidators: true,
     });
 
-    if (!updatedComment) {
-      return res.status(404).json({ message: "Comment not found" });
-    }
-
-    res.status(200).json(updatedComment);
+    res.status(200).json(updated);
   } catch (error) {
     next(error);
   }
 });
 
-// DELETE comment
+// DELETE
 router.delete("/:id", auth, async (req, res, next) => {
   try {
-    const { id } = req.params;
-    const deletedComment = await Comment.findByIdAndDelete(id);
+    const comment = await Comment.findById(req.params.id);
+    if (!comment) return res.status(404).json({ message: "Not found" });
 
-    if (!deletedComment) {
-      return res.status(404).json({ message: "Comment not found" });
+    //optional, shouldnt need in the end but ill have to use if I have trouble finishing up the front end
+    if (comment.user.toString() !== req.user.id) {
+      return res.status(403).json({ message: "Forbidden: not your comment" });
     }
 
-    res.status(200).json({ message: "Comment deleted successfully." });
+    await comment.remove();
+    res.status(200).json({ message: "Deleted" });
   } catch (error) {
     next(error);
   }

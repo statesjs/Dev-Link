@@ -1,0 +1,46 @@
+IMPORTANT ***
+-----
+should consider adding joi, if time allots . security and validation are pretty
+high already:
+
+mongoose schema,
+helmet,
+select method to hide data,
+jwt encryption,
+regex,
+10 salt rounds on password hashing,
+-----
+
+
+req.user.id from auth protected routes, or just tokenated sessions will
+use reference the user mongodbid 
+
+
+5/9 9:34am -
+
+
+
+added a reference field under resources -> author to fill with the user 
+mongodb id and reference the user collection for the related user, 
+this is in conjuction with auth middleware to make more dynamic, strictly 
+tying related PROTECTED data"
+
+5/9 10:12am - 
+
+refactored ALL routes to implement jwt req.user object
+
+refactored comment model to:
+- reference other collections
+- created indexes for faster query
+
+refactored user model to:
+- reference other collections related
+- protect sensitive info from query
+- created indexes for better query times
+
+end notes for this entry:
+-should consider select options colliding, maybe have to just set false on 
+the model, then only override on the routes when needed
+
+
+

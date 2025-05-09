@@ -7,7 +7,8 @@ function auth(req, res, next) {
   }
   try {
     const decoded = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = decoded; // { id: userId }
+    req.user = decoded; // contains the mongodb id, should be able to use this
+    //on every auth route to make the page more user focused
     console.log(req.user, "this is a test, dont forget to delete");
     next();
   } catch (error) {

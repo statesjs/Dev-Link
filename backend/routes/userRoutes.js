@@ -5,28 +5,19 @@ const router = express.Router();
 //GET
 router.get("/", async (req, res, next) => {
   try {
-    const users = await User.find();
+    const users = await User.find().select("username _id imageUrl");
     res.status(200).json(users);
   } catch (error) {
     next(error);
   }
 });
 
-//POST create a new user moved over to authRoutes
-// router.post("/", async (req, res, next) => {
-//   try {
-//     const user = await User.create(req.body);
-//     res.status(201).json(user);
-//   } catch (error) {
-//     next(error);
-//   }
-// });
-
 // GET a user by ID
 router.get("/:id", async (req, res, next) => {
   try {
-    const { id } = req.params;
-    const user = await User.findById(id);
+    const user = await User.findById(req.params.id).select(
+      "username _id imageUrl"
+    );
 
     if (!user) {
       return res.status(404).json({ message: "User not found" });
