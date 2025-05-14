@@ -23,7 +23,7 @@ const resourceSchema = mongoose.Schema(
     link: {
       required: false,
       type: String,
-      minLength: 5,
+      minLength: 0,
       maxLength: 1000,
     },
     image: {

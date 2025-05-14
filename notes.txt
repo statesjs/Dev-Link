@@ -64,3 +64,28 @@ focus on a display and TIPTAP integration
 
 getting rid of Material UI, ill refer to it later, for now, it's a bit too hard for
 me to read, having better success making things raw.
+
+fixed mismatch of old endpoint naming conventions requests to the front end, causing login reqs to fail(/api/users vs api/auth)
+
+displaying resources, will reformat later
+
+5/14 - 
+TODO:
+
+- fix display for resources, limit to 5 on homepage,
+
+- set routes to be private by verifying token
+
+- fixed buggy race conditions
+
+- fixed logout
+
+- added skeleton tiptap editor
+
+- truncated resources to be  "preview"
+
+-strip html because tiptap outputs doenst interpret html
+
+- need to implement update n delete
+
+- mabe delete some features as its buggy and should be handled better

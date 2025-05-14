@@ -9,7 +9,9 @@ import HomePage from "./pages/HomePage";
 import NotFoundPage from "./pages/NotFoundPage";
 import ResourcePage from "./pages/ResourcePage";
 import PrivateRoute from "./components/PrivateRoute";
-import "./styles/global.css";
+import ProfilePage from "./pages/ProfilePage";
+
+import "./App.css";
 
 function App() {
   return (
@@ -27,6 +29,14 @@ function App() {
             element={
               <PrivateRoute>
                 <CreateResourcePage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/profile"
+            element={
+              <PrivateRoute>
+                <ProfilePage />
               </PrivateRoute>
             }
           />

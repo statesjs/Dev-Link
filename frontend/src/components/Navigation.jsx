@@ -50,6 +50,9 @@ export default function Navigation() {
         <li>
           <a href="https://github.com/statesjs">GitHub</a>
         </li>
+        <li>
+          <a href="/profile">Profile</a>
+        </li>
       </ul>
 
       <div className="nav-auth">

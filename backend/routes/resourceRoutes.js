@@ -69,11 +69,12 @@ router.delete("/:id", auth, async (req, res, next) => {
   }
 });
 
-// GET a resource by ID
+/// GET a resource by ID
 router.get("/:id", async (req, res, next) => {
   try {
     const { id } = req.params;
-    const resource = await Resource.findById(id);
+
+    const resource = await Resource.findById(id).populate("author", "username");
 
     if (!resource) {
       return res.status(404).json({ message: "Resource not found" });
