@@ -31,7 +31,7 @@ export function AuthProvider({ children }) {
   }, []);
 
   const login = (newToken) => {
-    console.log("🔐 login(): saving token", newToken);
+    console.log("login(): test to save token", newToken);
     localStorage.setItem("token", newToken);
     setToken(newToken);
 

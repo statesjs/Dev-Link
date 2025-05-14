@@ -5,7 +5,7 @@ export function getResources() {
   return apiFetch("/resources");
 }
 
-// GET /resources/:id — Fetch single resource by ID
+// GET /resources/:id — get single resource by ID
 export function getResourceById(id) {
   return apiFetch(`/resources/${id}`);
 }
@@ -18,7 +18,7 @@ export function createResource(data) {
   });
 }
 
-// PUT /resources/:id — Update a resource (auth required, optional)
+// PUT /resources/:id — Update a resource , auth, consider fo rafter capstone
 export function updateResource(id, data) {
   return apiFetch(`/resources/${id}`, {
     method: "PUT",

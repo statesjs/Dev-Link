@@ -10,6 +10,7 @@ import NotFoundPage from "./pages/NotFoundPage";
 import ResourcePage from "./pages/ResourcePage";
 import PrivateRoute from "./components/PrivateRoute";
 import ProfilePage from "./pages/ProfilePage";
+import EditResourcePage from "./pages/EditResourcePage";
 
 import "./App.css";
 
@@ -37,6 +38,14 @@ function App() {
             element={
               <PrivateRoute>
                 <ProfilePage />
+              </PrivateRoute>
+            }
+          />
+          <Route
+            path="/edit/:id"
+            element={
+              <PrivateRoute>
+                <EditResourcePage />
               </PrivateRoute>
             }
           />

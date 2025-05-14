@@ -3,7 +3,7 @@ import { getResources } from "../api/resources";
 import { Link } from "react-router-dom";
 import { Box, Typography, Card, CardContent, Button } from "@mui/material";
 
-// 🔁 Native HTML tag stripper
+// 
 function stripHtml(html) {
   const tmp = document.createElement("div");
   tmp.innerHTML = html;

@@ -1,4 +1,3 @@
-// src/pages/ResourcePage.jsx
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { getResourceById } from "../api/resources";
@@ -19,7 +18,7 @@ export default function ResourcePage() {
   useEffect(() => {
     getResourceById(id)
       .then((data) => {
-        console.log("Fetched resource:", data); // 👈 Log exact data
+        console.log("test delte later, data:", data);
         setResource(data);
         setLoading(false);
       })
