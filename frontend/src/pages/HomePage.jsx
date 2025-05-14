@@ -1,8 +1,14 @@
-// src/pages/HomePage.jsx
 import React, { useEffect, useState } from "react";
 import { getResources } from "../api/resources";
 import { Link } from "react-router-dom";
 import { Box, Typography, Card, CardContent, Button } from "@mui/material";
+
+// 🔁 Native HTML tag stripper
+function stripHtml(html) {
+  const tmp = document.createElement("div");
+  tmp.innerHTML = html;
+  return tmp.textContent || tmp.innerText || "";
+}
 
 function HomePage() {
   const [resources, setResources] = useState([]);
@@ -23,18 +29,36 @@ function HomePage() {
         <Typography>No resources found.</Typography>
       ) : (
         resources.map((resource) => (
-          <Card key={resource._id} sx={{ mb: 2 }}>
+          <Card key={resource._id} className="resource-card" sx={{ mb: 3 }}>
             <CardContent>
-              <Typography variant="h6">{resource.title}</Typography>
-              <Typography variant="body2" color="text.secondary">
-                {resource.body?.slice(0, 100)}...
+              <Link
+                to={`/resource/${resource._id}`}
+                style={{ textDecoration: "none" }}
+              >
+                <Typography variant="h6" color="primary">
+                  {resource.title}
+                </Typography>
+              </Link>
+
+              <Typography
+                variant="caption"
+                color="text.secondary"
+                sx={{ display: "block", mt: 0.5 }}
+              >
+                Posted by: {resource.author?.username || "Unknown"} on{" "}
+                {new Date(resource.createdAt).toLocaleDateString()}
               </Typography>
+
+              <Box sx={{ mt: 1 }}>
+                {stripHtml(resource.body).slice(0, 200)}...
+              </Box>
+
               {resource.link && (
                 <Button
                   href={resource.link}
                   target="_blank"
                   rel="noopener noreferrer"
-                  sx={{ mt: 1 }}
+                  sx={{ mt: 2 }}
                 >
                   Visit
                 </Button>

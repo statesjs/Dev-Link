@@ -14,8 +14,10 @@ export async function apiFetch(path, options = {}) {
 
   if (!res.ok) {
     const error = await res.json();
+    console.error("API error response:", error); // test, delete
     throw new Error(error.message || "API error");
   }
+  console.log("API call with token:", token);
 
   return res.json();
 }

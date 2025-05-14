@@ -5,34 +5,63 @@ const AuthContext = createContext();
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(() => localStorage.getItem("token"));
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    if (token) {
+    const storedToken = localStorage.getItem("token");
+    if (storedToken) {
       fetch("http://localhost:5050/api/auth/me", {
-        headers: { Authorization: `Bearer ${token}` },
+        headers: { Authorization: `Bearer ${storedToken}` },
       })
         .then((res) => res.json())
-        .then((data) => setUser(data))
+        .then((data) => {
+          setToken(storedToken);
+          setUser(data);
+          setLoading(false);
+        })
         .catch(() => {
+          localStorage.removeItem("token");
           setToken(null);
           setUser(null);
+          setLoading(false);
         });
+    } else {
+      setLoading(false);
     }
-  }, [token]);
+  }, []);
 
   const login = (newToken) => {
+    console.log("🔐 login(): saving token", newToken);
     localStorage.setItem("token", newToken);
     setToken(newToken);
+
+    fetch("http://localhost:5050/api/auth/me", {
+      headers: { Authorization: `Bearer ${newToken}` },
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error("Failed to fetch user");
+        return res.json();
+      })
+      .then((data) => {
+        setUser(data);
+      })
+      .catch((err) => {
+        console.log(err.message);
+        localStorage.removeItem("token");
+        setToken(null);
+        setUser(null);
+      });
   };
 
   const logout = () => {
+    console.log("🚪 logout(): clearing session");
     localStorage.removeItem("token");
     setToken(null);
     setUser(null);
   };
 
   return (
-    <AuthContext.Provider value={{ user, token, login, logout }}>
+    <AuthContext.Provider value={{ user, token, login, logout, loading }}>
       {children}
     </AuthContext.Provider>
   );

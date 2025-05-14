@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 import "./Navigation.css";
 import logo from "../assets/logo.png";
 import light from "../assets/light.png";
@@ -8,6 +9,7 @@ import dark from "../assets/dark.png";
 export default function Navigation() {
   const [isDark, setDark] = useState(false);
   const navigate = useNavigate();
+  const { user, logout } = useAuth();
 
   const handleToggle = () => {
     setDark((prev) => !prev);
@@ -22,6 +24,11 @@ export default function Navigation() {
     navigate("/register");
   };
 
+  const handleLogout = () => {
+    logout();
+    navigate("/");
+  };
+
   return (
     <nav className={`nav-bar ${isDark ? "dark" : "light"}`}>
       <a href="/">
@@ -32,6 +39,11 @@ export default function Navigation() {
         <li>
           <a href="/">Resources</a>
         </li>
+        {user && (
+          <li>
+            <a href="/create">Create</a>
+          </li>
+        )}
         <li>
           <a href="/">Blog</a>
         </li>
@@ -41,12 +53,20 @@ export default function Navigation() {
       </ul>
 
       <div className="nav-auth">
-        <button onClick={handleLoginClick} className="btn login-btn">
-          Login
-        </button>
-        <button onClick={handleRegisterClick} className="btn register-btn">
-          Register
-        </button>
+        {user ? (
+          <button onClick={handleLogout} className="btn logout-btn">
+            Logout
+          </button>
+        ) : (
+          <>
+            <button onClick={handleLoginClick} className="btn login-btn">
+              Login
+            </button>
+            <button onClick={handleRegisterClick} className="btn register-btn">
+              Register
+            </button>
+          </>
+        )}
       </div>
 
       <img
