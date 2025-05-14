@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import "./Navigation.css";
 import logo from "../assets/logo.png";
 import light from "../assets/light.png";
@@ -6,11 +7,21 @@ import dark from "../assets/dark.png";
 
 export default function Navigation() {
   const [isDark, setDark] = useState(false);
+  const navigate = useNavigate();
 
   const handleToggle = () => {
     setDark((prev) => !prev);
-    document.body.classList.toggle("dark-mode", !isDarkMode);
+    document.body.classList.toggle("dark-mode", !isDark);
   };
+
+  const handleLoginClick = () => {
+    navigate("/login");
+  };
+
+  const handleRegisterClick = () => {
+    navigate("/register");
+  };
+
   return (
     <nav className={`nav-bar ${isDark ? "dark" : "light"}`}>
       <a href="/">
@@ -19,18 +30,24 @@ export default function Navigation() {
 
       <ul className="nav-links">
         <li>
-          <a href="/">About</a>
-        </li>
-        <li>
           <a href="/">Resources</a>
         </li>
         <li>
           <a href="/">Blog</a>
         </li>
         <li>
-          <a href="/">GitHub</a>
+          <a href="https://github.com/statesjs">GitHub</a>
         </li>
       </ul>
+
+      <div className="nav-auth">
+        <button onClick={handleLoginClick} className="btn login-btn">
+          Login
+        </button>
+        <button onClick={handleRegisterClick} className="btn register-btn">
+          Register
+        </button>
+      </div>
 
       <img
         src={isDark ? light : dark}

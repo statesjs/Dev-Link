@@ -60,3 +60,7 @@ general cleanup + added forgotten but imported libraries
 testing and readign through docx on material UI, going to refer back to studying through ReactJS once more before tackling forms and
 focus on a display and TIPTAP integration
 
+5/13 -
+
+getting rid of Material UI, ill refer to it later, for now, it's a bit too hard for
+me to read, having better success making things raw.

@@ -44,7 +44,7 @@ const authRoutes = require("./routes/authRoutes");
 app.use("/api/users", userRoutes);
 app.use("/api/resources", resourceRoutes);
 app.use("/api/comments", commentRoutes);
-app.use("/api/users", authRoutes); //shares the same end point as the normal users route, dont forget
+app.use("/api/auth", authRoutes); //shares the same end point as the normal users route, dont forget
 
 //ROOT get request + view
 app.get("/", (req, res) => {

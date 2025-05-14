@@ -1,20 +1,25 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import viteLogo from "/vite.svg";
-import "./App.css";
-import Navigation from "./components/Navigation";
-import "@fontsource/roboto/300.css";
-import "@fontsource/roboto/400.css";
-import "@fontsource/roboto/500.css";
-import "@fontsource/roboto/700.css";
-
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { AuthProvider } from "./context/AuthContext";
+import Navbar from "./components/Navigation";
+import LoginPage from "./pages/LoginPage";
+import RegisterPage from "./pages/RegisterPage";
+import CreateResourcePage from "./pages/CreateResourcePage";
+import HomePage from "./pages/HomePage";
+console.log("API Base URL:", import.meta.env.VITE_API_URL);
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
-    <>
-      <Navigation />
-    </>
+    <AuthProvider>
+      <Router>
+        <Navbar />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
+          <Route path="/create" element={<CreateResourcePage />} />
+        </Routes>
+      </Router>
+    </AuthProvider>
   );
 }
 
