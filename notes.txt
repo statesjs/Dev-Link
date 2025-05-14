@@ -3,7 +3,6 @@ IMPORTANT ***
 Make sure to come back to the back end to implement multer and adding connection to
 cloudinary image hosting
 -----
-
 SECURITY NOTES **
 -----
 should consider adding joi, if time allots . security and validation are pretty
@@ -17,8 +16,11 @@ bcryptjs- 10 salt rounds : https://www.npmjs.com/package/bcryptjs
 regex: https://digitalfortress.tech/tips/top-15-commonly-used-regex/
 
 -----
+ATTRIBUTIONS *
 
-
+logo- <a href="https://www.flaticon.com/free-icons/book" title="book icons">Book icons created by mikan933 - Flaticon</a>
+light/dark icon - <a href="https://www.flaticon.com/free-icons/light-dark" title="light dark icons">Light dark icons created by Any Icon - Flaticon</a>
+-----
 req.user.id from auth protected routes, or just tokenated sessions will
 use reference the user mongodbid 
 
@@ -52,4 +54,9 @@ the model, then only override on the routes when needed
 5/9 11:05am - 
 
 general cleanup + added forgotten but imported libraries
+
+5/12 11:50am - 
+
+testing and readign through docx on material UI, going to refer back to studying through ReactJS once more before tackling forms and
+focus on a display and TIPTAP integration
 
