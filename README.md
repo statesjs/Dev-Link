@@ -61,7 +61,7 @@ backend/
 
 ### Security NOTES
 
--should consider adding joi, if time allots . security and validation are pretty high already:
+- should consider adding joi, if time allots . security and validation are pretty high already:
 
 - mongoose schema: https://mongoosejs.com/docs/guide.html
 - helmet: https://www.npmjs.com/package/helmet
@@ -76,6 +76,24 @@ backend/
 
 logo- <a href="https://www.flaticon.com/free-icons/book" title="book icons">Book icons created by mikan933 - Flaticon</a>
 light/dark icon - <a href="https://www.flaticon.com/free-icons/light-dark" title="light dark icons">Light dark icons created by Any Icon - Flaticon</a>
+
+---
+
+### RESOURCES
+
+- <a href="https://www.youtube.com/watch?v=EVOFt8Its6I" title="Multer">Understanding File Uploads in Node.js using Multer - Web Development Concepts Explained</a>
+- <a href="https://www.youtube.com/watch?v=UkqgaKJxfZ0" title="Cloudinary">Ultimate Guide to Cloudinary Image/Video Uploads in MERN Stack | Step-by-Step Tutorial</a>
+- <a href="https://www.youtube.com/playlist?list=PL4cUxeGkcC9g6m_6Sld9Q4jzqdqHd2HiD" title="REGEX">REGEX by Net Ninja</a>
+- <a href="https://www.youtube.com/playlist?list=PL4cUxeGkcC9iJ_KkrkBZWZRHVwnzLIoUE" title="MERN">MERN by Net Ninja</a>
+- <a href="https://www.youtube.com/watch?v=WsRBmwNkv3Q&list=PL4cUxeGkcC9g8OhpOZxNdhXggFz2lOuCT" title="Auth">MERN JWT BCRYPT by Net Ninja</a>
+- <a href="https://mui.com/" title="MUI">Material UI component library</a>
+- <a href="https://www.youtube.com/watch?v=0KEpWHtG10M&list=LL&index=4" title="">Material UI tutorial by Net Ninja</a>
+- <a href="https://www.youtube.com/watch?v=xfKYYRE6-TQ&list=LL&index=11&t=53s" title="">React Hooks by PedroTech</a>
+- <a href="https://www.youtube.com/watch?v=QVffer2fRfg&list=LL&index=18" title="tiptap">Tiptap tutorial by Cand Dev</a>
+- <a href="https://www.youtube.com/watch?v=SqcY0GlETPk&list=LL&index=22&t=2111s" title="">React Tutorial by Programmng with Mosh</a>
+- <a href="https://www.youtube.com/watch?v=DZBGEVgL2eE&t=1135s" title="Mongoose">Mongoose Tutorial by Web Dev Simplified</a>
+- <a href="https://www.youtube.com/watch?v=7Q17ubqLfaM&t=108s" title="JWT">JWT by Web Dev Simplified</a>
+- <a href="https://jwtsecret.com/generate" title="">JWT Secret Generator</a>
 
 ---
 
