@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import "./Navigation.css";
 import logo from "../assets/logo.png";
@@ -31,27 +31,33 @@ export default function Navigation() {
 
   return (
     <nav className={`nav-bar ${isDark ? "dark" : "light"}`}>
-      <a href="/">
+      <Link to="/">
         <img src={logo} alt="DevLink logo" className="logo" />
-      </a>
+      </Link>
 
       <ul className="nav-links">
         <li>
-          <a href="/">Resources</a>
+          <Link to="/">Resources</Link>
         </li>
         {user && (
           <li>
-            <a href="/create">Create</a>
+            <Link to="/create">Create</Link>
           </li>
         )}
         <li>
-          <a href="/">Blog</a>
+          <Link to="/blog">Blog</Link>
         </li>
         <li>
-          <a href="https://github.com/statesjs">GitHub</a>
+          <a
+            href="https://github.com/statesjs"
+            target="_blank"
+            rel="noreferrer"
+          >
+            GitHub
+          </a>
         </li>
         <li>
-          <a href="/profile">Profile</a>
+          <Link to="/profile">Profile</Link>
         </li>
       </ul>
 
