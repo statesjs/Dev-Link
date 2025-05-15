@@ -38,8 +38,8 @@ router.post("/", auth, async (req, res, next) => {
       resource, //have to inject this on the front end
       user: req.user.id, //finally used here
     });
-
-    res.status(201).json(comment);
+    const populated = await comment.populate("user", "username");
+    res.status(201).json(populated);
   } catch (error) {
     next(error);
   }
