@@ -30,7 +30,7 @@ app.use(
     credentials: true,
   })
 );
-
+console.log(" CORS ORIGIN:", process.env.CLIENT_ORIGIN);
 //  Native Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true })); //parses incoming form data
