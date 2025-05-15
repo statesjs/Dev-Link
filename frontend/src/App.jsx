@@ -24,6 +24,7 @@ function App() {
           {/* bundles route(s) so that only one may be accessed and rendered at a time*/}
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/blog" element={<NotFoundPage />} />
           <Route path="/register" element={<RegisterPage />} />
           <Route
             path="/create"
