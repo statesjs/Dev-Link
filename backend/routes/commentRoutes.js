@@ -38,7 +38,8 @@ router.post("/", auth, async (req, res, next) => {
       resource, //have to inject this on the front end
       user: req.user.id, //finally used here
     });
-    const populated = await comment.populate("user", "username");
+    const populated = await comment.populate("user", "username"); //had to fix in order to receive live reaction of a posted comment to see the username appropriately, a refresh calls the get
+    // in orrder to get the username to populate, but it looks bad in the moment
     res.status(201).json(populated);
   } catch (error) {
     next(error);

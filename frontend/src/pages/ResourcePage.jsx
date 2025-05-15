@@ -11,6 +11,9 @@ import {
   TextField,
   Button,
 } from "@mui/material";
+import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
+import FormatListNumberedIcon from "@mui/icons-material/FormatListNumbered";
+
 import {
   getCommentsByResource,
   createComment,

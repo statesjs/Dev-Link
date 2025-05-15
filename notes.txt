@@ -102,4 +102,11 @@ displaying resources, will reformat later
 
 - created update functionality 
 
+5/15 -
+
+- created the profile route, displaying only user related resources
+
+- finally utilized the comments backend routing 
+
+-set up a CRUD functionality for comments
 

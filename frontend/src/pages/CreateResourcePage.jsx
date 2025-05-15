@@ -10,6 +10,9 @@ import {
   MenuItem,
   Select,
 } from "@mui/material";
+import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
+import FormatListNumberedIcon from "@mui/icons-material/FormatListNumbered";
+import CodeIcon from "@mui/icons-material/Code";
 import { useEditor, EditorContent } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import TextAlign from "@tiptap/extension-text-align";
@@ -140,9 +143,9 @@ export default function CreateResourcePage() {
                   onClick={() =>
                     editor.chain().focus().toggleBulletList().run()
                   }
-                >
-                  Bullet List
-                </Button>
+                  startIcon={<FormatListBulletedIcon />}
+                />
+
                 <Button
                   variant={
                     editor.isActive("orderedList") ? "contained" : "outlined"
@@ -150,17 +153,18 @@ export default function CreateResourcePage() {
                   onClick={() =>
                     editor.chain().focus().toggleOrderedList().run()
                   }
-                >
-                  Numbered List
-                </Button>
+                  startIcon={<FormatListNumberedIcon />}
+                />
                 <Button
                   variant={
                     editor.isActive("codeBlock") ? "contained" : "outlined"
                   }
                   onClick={() => editor.chain().focus().toggleCodeBlock().run()}
+                  startIcon={<CodeIcon />}
                 >
                   Code
                 </Button>
+
                 <Button variant="outlined" onClick={addImage}>
                   Insert Image
                 </Button>
