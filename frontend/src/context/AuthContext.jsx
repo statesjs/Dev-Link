@@ -54,7 +54,7 @@ export function AuthProvider({ children }) {
   };
 
   const logout = () => {
-    console.log("🚪 logout(): clearing session");
+    console.log("logout(): clearing session");
     localStorage.removeItem("token");
     setToken(null);
     setUser(null);
