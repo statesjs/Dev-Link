@@ -26,9 +26,8 @@ app.use(morgan("common")); //just a quality of life logger for server requests
 //set cors
 app.use(
   cors({
-    origin: "http://localhost:5173", // replace with the frontend url later 🚧🚧🚧🚧
-    // origin: process.env.CLIENT_ORIGIN,
-    // credentials: true,
+    origin: process.env.CLIENT_ORIGIN || "http://localhost:5173",
+    credentials: true,
   })
 );
 
