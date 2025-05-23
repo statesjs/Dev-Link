@@ -7,7 +7,7 @@ const morgan = require("morgan");
 const helmet = require("helmet");
 
 const PORT = process.env.PORT || 5050;
-const expressLayouts = require("express-ejs-layouts");
+const expressLayouts = require("express-ejs-layouts"); //consider using later
 
 //custom middleware
 const errorHandler = require("./middleware/errorHandler");
@@ -15,7 +15,7 @@ const errorHandler = require("./middleware/errorHandler");
 // ---3RD PARTY MIDDLEWARE---
 
 //set multer storage
-const upload = require("./middleware/upload");
+const upload = require("./middleware/upload"); //DEFINITELY USE LATER🚧
 
 //set helmet
 app.use(helmet()); //using default security
@@ -30,7 +30,7 @@ app.use(
     credentials: true,
   })
 );
-console.log(" CORS ORIGIN:", process.env.CLIENT_ORIGIN);
+
 //  Native Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true })); //parses incoming form data
@@ -45,7 +45,7 @@ const authRoutes = require("./routes/authRoutes");
 app.use("/api/users", userRoutes);
 app.use("/api/resources", resourceRoutes);
 app.use("/api/comments", commentRoutes);
-app.use("/api/auth", authRoutes); //shares the same end point as the normal users route, dont forget
+app.use("/api/auth", authRoutes); 
 
 //ROOT get request + view
 app.get("/", (req, res) => {

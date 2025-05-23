@@ -20,16 +20,6 @@ ATTRIBUTIONS *
 
 logo- <a href="https://www.flaticon.com/free-icons/book" title="book icons">Book icons created by mikan933 - Flaticon</a>
 light/dark icon - <a href="https://www.flaticon.com/free-icons/light-dark" title="light dark icons">Light dark icons created by Any Icon - Flaticon</a>
------
-TODO *
-
-add comments and have it display below resource
-adding comment amount below recouse preview
-need to limit preview to 10 OR consider pagination
-optimize images?
-tiptap bullets are acting buggy
-logout should have a settimeout rendering a goodbye
-profile should have a stat card 
 
 -----
 req.user.id from auth protected routes, or just tokenated sessions will

@@ -80,7 +80,7 @@ router.post("/login", async (req, res, next) => {
 const auth = require("../middleware/auth");
 
 //make sure to have the initial load check this endpoint first, then if not, go to the unlogged page
-
+//auth middleware sets a user object into the request, making req.user.id available
 router.get("/me", auth, async (req, res) => {
   const user = await User.findById(req.user.id).select("-password");
   //select excludes their password
